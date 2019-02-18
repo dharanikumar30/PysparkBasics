@@ -1,0 +1,17 @@
+read two files - one is with local and national
+	       - other is with only local
+
+join two files and find the national
+
+
+
+df= df1.join(df2, df1.region != df2.region, 'inner').select(df1.names, df1.region)
+print df.dropDuplicates().show()
+
+
++-----+--------+
+|names|  region|
++-----+--------+
+|Kumar|National|
+|   DK|National|
++-----+--------+

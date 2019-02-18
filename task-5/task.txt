@@ -1,0 +1,15 @@
+Task - 
+
+
+
+Code :
+
+my_window = Window.orderBy("a")
+df = df1.withColumn("pre", F.lead(df1.b).over(my_window))
+print df.withColumn("F", (df.b*.25+df.pre*.50+df.b*.25)).show()
+
+
+
+
+output :
+

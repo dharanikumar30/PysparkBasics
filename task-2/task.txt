@@ -1,0 +1,22 @@
+in the given dataset find the prime and non-prime customers.
+
+when video uploaded is grater than 50000, then he is a prime customer.
+
+
+sol:
+
+df1.withColumn("customer", coalesce(*[when(col(c) > 27322, lit("prime")) for c in df1.columns[:4]])).show(5)
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+
+
+spark = SparkSession \
+    .builder \
+    .appName("Python Spark SQL basic example") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+
+df1 = spark.read.load("F:/pysparksamples/task-2/data.csv",format="csv", sep=",", inferSchema="true", header="true")
+
+df1.select("*").withColumn('Customers',when(df1.VideoUploads < 700,df1.Customers).otherwise('Prime')).show()
