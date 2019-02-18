@@ -1,0 +1,36 @@
+1. download public dataset
+
+2. compare two datasets
+
+3. find data is updated or not 
+
+from pyspark.sql import SparkSession
+
+spark = SparkSession \
+    .builder \
+    .appName("Python Spark SQL basic example") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+
+df1 = spark.read.load("F:/pysparksamples/task-1/data.csv",
+                     format="csv", sep=",", inferSchema="true", header="true")
+#df1.show(5)
+#print df1.dtypes
+df2 = spark.read.load("F:/pysparksamples/task-1/testing.csv",
+                     format="csv", sep=",", inferSchema="true", header="true")
+
+difference = df2.subtract(df1)
+print difference.show()
+print "diff "
+print difference.count()
+
+uniondf = df1.union(df2)
+
+print "union "
+print uniondf.count()
+
+
+intersectiondf = df1.intersect(df2)
+
+print "intersection "
+print intersectiondf.count()
